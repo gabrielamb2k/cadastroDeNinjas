@@ -1,8 +1,6 @@
 package dev.java10x.CadastroDeNinjas.Ninjas;
 
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +22,7 @@ public class NinjaControllerUi {
     public String listarNinjas(Model model){
         List<NinjaDTO> ninjas = ninjaService.listarNinjas();
         model.addAttribute("ninjas", ninjas);
-        return "listarNinjas"; //retornar o nome do arquivo html
+        return "Ninja/listarNinjas"; //retornar o nome do arquivo html
     }
 
     @GetMapping("/deletar/{id}")
@@ -38,10 +36,10 @@ public class NinjaControllerUi {
         NinjaDTO ninja = ninjaService.listarNinjasPorId(id);
         if(ninja != null){
             model.addAttribute("ninja", ninja);
-            return "detalhesninja";
+            return "Ninja/detalhesninja";
         } else {
             model.addAttribute("mensagem", "Ninja não encontrado");
-            return "listarNinjas";
+            return "Ninja/listarNinjas";
         }
     }
 
@@ -50,10 +48,10 @@ public class NinjaControllerUi {
         NinjaDTO ninja = ninjaService.alterarNinjasPorId(id, ninjaDTO);
         if(ninja != null){
             model.addAttribute("ninja", ninja);
-            return "alterarNinja";}
+            return "Ninja/alterarNinja";}
         else{
                 model.addAttribute("mensagem", "Ninja não encontrado");
-                return "listarNinjas";
+                return "Ninja/listarNinjas";
             }
 
     }
@@ -61,7 +59,7 @@ public class NinjaControllerUi {
     @GetMapping("/adicionar")
     public String mostrarFormularioAdicionarNinja(Model model){
         model.addAttribute("ninja", new NinjaDTO());
-        return "adicionarNinja";
+        return "Ninja/adicionarNinja";
     }
 
     @PostMapping("/salvar")

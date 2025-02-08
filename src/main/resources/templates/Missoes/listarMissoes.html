@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>Tabela de Missoes</title>
+    <style>
+        /* Estilo geral */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        /* Botão adicionar */
+        .btn-adicionar {
+            display: inline-block;
+            padding: 10px 15px;
+            margin-bottom: 20px;
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .btn-adicionar:hover {
+            opacity: 0.8;
+        }
+
+        /* Estilo da Tabela */
+        table {
+            width: 90%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        thead {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Estilo dos Botões */
+        a {
+            text-decoration: none;
+            padding: 8px 12px;
+            margin: 4px;
+            border-radius: 4px;
+            color: white;
+            font-size: 14px;
+            display: inline-block;
+        }
+
+        /* Botões personalizados */
+        td a:nth-child(1) {
+            background-color: #17a2b8;
+        }
+
+        td a:nth-child(2) {
+            background-color: #ffc107;
+        }
+
+        td a:nth-child(3) {
+            background-color: #dc3545;
+        }
+
+        td a:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+<h1>Lista de missoes</h1>
+<a class="btn-adicionar" th:href="@{/missoes/ui/adicionar}">Adicionar Nova Missao</a>
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Nome</th>
+        <th>Dificuldade</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each ="missao: ${missoes}">
+        <td th:text="${missao.id}"></td>
+        <td th:text="${missao.nome}"></td>
+        <td th:text="${missao.dificuldade}"></td>
+
+        <td>
+            <a th:href="@{/missoes/ui/listar/{id}(id=${missao.id})}">Ver Detalhes</a>
+            <a th:href="@{/missoes/ui/alterar/{id}(id=${missao.id})}">Alterar</a>
+            <a th:href="@{/missoes/ui/deletar/{id}(id=${missao.id})}">Deletar</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
